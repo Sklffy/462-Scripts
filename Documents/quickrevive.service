@@ -1,0 +1,7 @@
+[Unit]
+Description=You need a little a revive
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/sysd-check.sh
+User=root

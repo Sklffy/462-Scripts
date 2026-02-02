@@ -1,0 +1,14 @@
+[Unit]
+Description= User-level audio routing and device management
+After=network.target
+
+[Service]
+ExecStart=
+Restart=always
+RestartSec=10
+User=user
+Environment=DISPLAY=:1.0
+Environment=XDG_RUNTIME_DIR=/run/user/1001
+
+[Install]
+WantedBy=default.target

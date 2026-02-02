@@ -1,0 +1,10 @@
+[Unit]
+Description=You need a little a revive!
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+Unit=quickrevive.service
+
+[Install]
+WantedBy=timers.target

